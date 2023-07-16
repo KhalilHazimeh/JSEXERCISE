@@ -400,3 +400,10 @@ a{
     background-color: #723881;
     border: 2px solid #723881;
 }
+
+.offcanvas-header{
+    background-color: #723881;
+}
+.offcanvas-title{
+    color: white;
+}

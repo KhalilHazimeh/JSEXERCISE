@@ -95,7 +95,7 @@
                 <div class="row flex-nowrap justify-content-between position-relative">
                     <div class="col-lg-3 header-column-left">
                         <a title="Dr Nutrition UAE | Online Supplement & Nutrition Store" href="https://drnutrition.com/en-ae" class="header-logo">
-                            <img src="images/headerlogo.png" alt="logo">
+                            <img  src="images/headerlogo.png" alt="logo">
                         </a>
                     </div>
                     <div class="col-lg-7 header-search-wrap">
@@ -168,11 +168,11 @@
         <div class="info">
             <div class="row">
                 <div class="col-lg-4 image-box">
-                    <img class="img-fluid" src="images/nwGM1Rzm9Q8rtxuSEi0buHcjfBmhz077VyzROqoC.png" alt="">
+                    <img class=" product-img img-fluid" src="images/nwGM1Rzm9Q8rtxuSEi0buHcjfBmhz077VyzROqoC.png" alt="">
                 </div>
                 <div class="col-lg-5 details">
                     <div class="details-info">
-                        <h3>Laperva Iso Triple Zero Next Generation, Belgian Chocolate, 4 LB</h3>
+                        <h3 id="product-title">Laperva Iso Triple Zero Next Generation, Belgian Chocolate, 4 LB</h3>
                         <span class="free-delivery"><i class="las la-truck"></i>
                             Free Delivery On Orders Above AED&nbsp;80
                         </span>
@@ -187,13 +187,13 @@
                                 </div> 
                                 <div class="col-lg-14">
                                     <ul id="sizeList" class="list-inline form-custom-radio custom-selection">
-                                        <li id="li1" onclick="hideFlavors(1)" class="active option1">
+                                        <li id="li1" onclick="hideFlavors(1)" class="active option">
                                             <span href="#" class="option-label">5 LB</span>
                                         </li>
-                                        <li id="li2" onclick="hideFlavors(2)" class="option2">
+                                        <li id="li2" onclick="hideFlavors(2)" class="option">
                                             <span href="#" class="option-label">2 LB</span>
                                         </li>
-                                        <li id="li3" onclick="hideFlavors(3)" class="option3">
+                                        <li id="li3" onclick="hideFlavors(3)" class="option">
                                             <span href="#" class="option-label">4 LB</span>
                                         </li>
                                     </ul>
@@ -318,12 +318,25 @@
                                 </button>
                                 </div>
                                 <div>
-                                <button class="btn btn-primary btn-checkout">
-                                    <i class="fa-solid fa-money-check-dollar"></i>
+                                <button id="openNavBtn" data-toggle="offcanvas" data-target="#myNav" class="btn btn-primary btn-checkout">
+                                    <i class="fa-solid fa-money-check-dollar"></i>   
                                     Continue to Checkout
                                 </button>
+                                <div class="offcanvas offcanvas-end" tabindex="-1" id="myNav">
+                                    <div class="offcanvas-header">
+                                        <h5 class="offcanvas-title">Your Basket</h5>
+                                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                    </div>
+                                    <div class="offcanvas-body">
+                                        <div>
+                                            <p class="quan"></p>
+                                            <p class="size"></p>
+                                            <p class="flav"></p>
+                                        </div>
+                                    </div>
                                 </div>
-                                </div>
+                            </div>
+                            </div>
                             </div>
                         </div>
                     </aside>
@@ -331,9 +344,8 @@
             </div>
         </div>
     </section>
-
-    <script src="js/mainj.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/all.min.js"></script>
+    <script src="js/mainj.js"></script>
 </body>
 </html>

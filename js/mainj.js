@@ -39,97 +39,28 @@ function updatePrice(counter){
 
 
 //Change the active state on click
-var li1 = document.getElementById('li1');
-var li2 = document.getElementById('li2');
-var li3 = document.getElementById('li3');
+const items = document.querySelectorAll('.option');
 
-li1.addEventListener('click', function() {
-    toggleActiveState(li1);
+items.forEach(item => {
+    item.addEventListener('click', () => {
+        
+        items.forEach(item => item.classList.remove('active'));
+        item.classList.add('active');
+    });
 });
-li2.addEventListener('click', function() {
-    toggleActiveState(li2);
-});
-li3.addEventListener('click', function() {
-    toggleActiveState(li3);
-});
-
-function toggleActiveState(li) {
-    li1.classList.remove('active');
-    li2.classList.remove('active');
-    li3.classList.remove('active');
-
-    li.classList.add('active');
-}
 
 
 //change flavors ready state
-var f1 = document.getElementById('f1');
-var f2 = document.getElementById('f2');
-var f3 = document.getElementById('f3');
-var f4 = document.getElementById('f4');
-var f5 = document.getElementById('f5');
-var f6 = document.getElementById('f6');
-var f7 = document.getElementById('f7');
-var f8 = document.getElementById('f8');
-var f9 = document.getElementById('f9');
-var f10 = document.getElementById('f10');
-var f11 = document.getElementById('f11');
-var f12 = document.getElementById('f12');
+const fs = document.querySelectorAll('.flavor');
 
-f1.addEventListener('click', function() {
-    changeState(f1);
-});
-f2.addEventListener('click', function() {
-    changeState(f2);
-});
-f3.addEventListener('click', function() {
-    changeState(f3);
-});
-f4.addEventListener('click', function() {
-    changeState(f4);
-});
-f5.addEventListener('click', function() {
-    changeState(f5);
-});
-f6.addEventListener('click', function() {
-    changeState(f6);
-});
-f7.addEventListener('click', function() {
-    changeState(f7);
-});
-f8.addEventListener('click', function() {
-    changeState(f8);
-});
-f9.addEventListener('click', function() {
-    changeState(f9);
-});
-f10.addEventListener('click', function() {
-    changeState(f10);
-});
-f11.addEventListener('click', function() {
-    changeState(f11);
-});
-f12.addEventListener('click', function() {
-    changeState(f12);
+fs.forEach(item => {
+    item.addEventListener('click', () => {
+        
+        fs.forEach(item => item.classList.remove('active'));
+        item.classList.add('active');
+    });
 });
 
-
-function changeState(li) {
-    f1.classList.remove('active');
-    f2.classList.remove('active');
-    f3.classList.remove('active');
-    f4.classList.remove('active');
-    f5.classList.remove('active');
-    f6.classList.remove('active');
-    f7.classList.remove('active');
-    f8.classList.remove('active');
-    f9.classList.remove('active');
-    f10.classList.remove('active');
-    f11.classList.remove('active');
-    f12.classList.remove('active');
-
-    li.classList.add('active');
-}
 
 //Adjust flavors availability accordint to the size
 
@@ -202,11 +133,15 @@ function hideFlavors(size) {
 function getActiveItem() {
     var activeSize = document.querySelector('#sizeList li.active');
     var activeFlavor = document.querySelector('#flavorList li.active');
-        
+    var activeQuantity = document.querySelector('#counter');
+
+
     var activeSizeText = activeSize ? activeSize.textContent : 'No active size selected';
     var activeFlavorText = activeFlavor ? activeFlavor.textContent : 'No active flavor selected';
-    
-    var alertMessage = 'Active Size: ' + activeSizeText + '\nActive Flavor: ' + activeFlavorText;
+    var activeQuantityText= activeQuantity ? activeQuantity.textContent : 'No quantity chosen';
+
+
+    var alertMessage = 'Active Size: ' + activeSizeText + '\nActive Flavor: ' + activeFlavorText + '\nActive Quantity: ' + activeQuantityText ;
     alert(alertMessage);
 
 
@@ -214,10 +149,38 @@ function getActiveItem() {
 
     var activeItems = {
         size: activeSizeText,
-        flavor: activeFlavorText
+        flavor: activeFlavorText,
+        quantity: activeQuantityText
     };
 
     localStorage.setItem('activeItems', JSON.stringify(activeItems));
-    alert('Active items saved to local storage');
+}
+
+//Open the offcanvas menu from bootstrap
+var myOffcanvas = document.getElementById('myNav');
+var openNavBtn = document.getElementById('openNavBtn');
+
+openNavBtn.addEventListener('click', function () {
+    var bootstrapOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
+    bootstrapOffcanvas.show();
+});
+
+//Get items from local storage to the checkout button
+
+var itemJSON = localStorage.getItem('activeItems');
+if (itemJSON) {
+    var activeItems = JSON.parse(itemJSON);
+
+    var size = activeItems.size;
+    var flavor = activeItems.flavor;
+    var quantity = activeItems.quantity;
+
+    var quantityHolder = document.querySelector('.quan');
+    var sizeHolder = document.querySelector('.size');
+    var flavorHolder = document.querySelector('.flav');
+
+    quantityHolder.innerHTML = 'Quantity: ' + quantity;
+    sizeHolder.innerHTML = 'Size: ' + size;
+    flavorHolder.innerHTML = 'Flavor: ' + flavor;
 
 }
