@@ -8,6 +8,10 @@ a{
 }
 
 
+.hidden{
+    display: none;
+}
+
 .free_shipping_alert {
     background: #68367f;
     color: #fff;
@@ -257,6 +261,14 @@ a{
     color: #fff;
     border-color: #723881;
     background: #723881;
+}
+
+.custom-selection>li.disabled .option-label{
+    cursor: default;
+    color: #a6a6a6;
+    border-color: #e1e1e1;
+    background: white;
+    text-decoration: line-through;
 }
 
 .custom-selection>li:hover{
