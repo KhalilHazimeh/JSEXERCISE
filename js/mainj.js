@@ -129,7 +129,7 @@ function hideFlavors(size) {
     }
 }
 
-//alert on add to cart
+
 function getActiveItem() {
     var activeSize = document.querySelector('#sizeList li.active');
     var activeFlavor = document.querySelector('#flavorList li.active');
@@ -143,44 +143,65 @@ function getActiveItem() {
 
     var alertMessage = 'Active Size: ' + activeSizeText + '\nActive Flavor: ' + activeFlavorText + '\nActive Quantity: ' + activeQuantityText ;
     alert(alertMessage);
-
-
-    //Add to local storage
-
-    var activeItems = {
+    
+    const product = {
+        id: generateProductId(), // Generate a unique product id
+        name: 'Product Name',    // Replace with actual product name
+        price: originalPrice.textContent,            // Replace with actual product price
+        quantity : activeQuantityText,
         size: activeSizeText,
-        flavor: activeFlavorText,
-        quantity: activeQuantityText
+        flavor: activeFlavorText
     };
 
-    localStorage.setItem('activeItems', JSON.stringify(activeItems));
+    addProductToUserSelection(product);
+
+      // Retrieve the updated user's product selections from the local storage
+    const storedSelectedProducts = getUserSelectionsFromLocalStorage();
+
+      // Display the stored selected products
+    console.log(storedSelectedProducts);
 }
 
-//Open the offcanvas menu from bootstrap
+function addProductToUserSelection(product) {
+    const storedSelectedProducts = JSON.parse(localStorage.getItem('selectedProducts')) || [];
+    storedSelectedProducts.push(product);
+    localStorage.setItem('selectedProducts', JSON.stringify(storedSelectedProducts));
+}
+
+  // Function to retrieve the user's product selections from the local storage
+function getUserSelectionsFromLocalStorage() {
+    const storedSelectedProducts = JSON.parse(localStorage.getItem('selectedProducts')) || [];
+    return storedSelectedProducts;
+}
+function generateProductId() {
+    return Math.random(); // Using timestamp as a simple example
+}
+
+
+function displaySelectedItems() {
+    const selectedItemsDisplay = document.getElementById('offcanvas-body');
+    const storedSelectedProducts = getUserSelectionsFromLocalStorage();
+
+    let innerHTML = '<ul>';
+    storedSelectedProducts.forEach((product) => {
+    innerHTML += `<h4>${product.name} </h4>`;
+    innerHTML += `<li>Price: $${product.price} </li>`;
+    innerHTML += `<li>Size: ${product.size}</li>`;
+    innerHTML += `<li>Quantity: $${product.quantity}</li>`;
+    innerHTML += `<li>Flavor: $${product.flavor}</li>`;
+    });
+    innerHTML += '</ul>';
+
+    selectedItemsDisplay.innerHTML = innerHTML;
+}
+
+
 var myOffcanvas = document.getElementById('myNav');
 var openNavBtn = document.getElementById('openNavBtn');
 
-openNavBtn.addEventListener('click', function () {
-    var bootstrapOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
-    bootstrapOffcanvas.show();
-});
+    openNavBtn.addEventListener('click', function () {
+        var bootstrapOffcanvas = new bootstrap.Offcanvas(myOffcanvas);
+        bootstrapOffcanvas.show();
 
-//Get items from local storage to the checkout button
-
-var itemJSON = localStorage.getItem('activeItems');
-if (itemJSON) {
-    var activeItems = JSON.parse(itemJSON);
-
-    var size = activeItems.size;
-    var flavor = activeItems.flavor;
-    var quantity = activeItems.quantity;
-
-    var quantityHolder = document.querySelector('.quan');
-    var sizeHolder = document.querySelector('.size');
-    var flavorHolder = document.querySelector('.flav');
-
-    quantityHolder.innerHTML = 'Quantity: ' + quantity;
-    sizeHolder.innerHTML = 'Size: ' + size;
-    flavorHolder.innerHTML = 'Flavor: ' + flavor;
-
-}
+        displaySelectedItems();
+    });
